@@ -1,5 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 
+
 import PageConnexion from "../pages/PageConnexion.vue"
 import PageHome from "../pages/PageHome.vue"
 import PageListe from "../pages/PageListe.vue"
@@ -12,14 +13,23 @@ const routes = [{
     {
         path: "/home",
         name: "home",
-        component: PageHome
+        component: PageHome,
+        // children: [
+        //     // UserHome will be rendered inside User's <router-view>
+        //     // when /user/:id is matched
+        //     { path: '/:id', component: PageListe },
+      
+        //     // ...other sub routes
+        //   ],
     },
     {
-        path: "/liste",
+        path: "/liste/:id",
         name: "liste",
         component: PageListe
     }
+
 ]
+
 
 const router = createRouter({
     history: createWebHistory(),

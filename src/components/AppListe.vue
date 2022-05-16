@@ -2,12 +2,16 @@
 
   <div class="container-liste">
     <div class="titreCat">
-      <router-link style="width:48%;" to="/liste">
+      <router-link style="width:48%;" :to="'/liste/'+id">
       <h2>{{ Name }}</h2>
       </router-link>
       <div class="tag">
-        <div>{{ TagOne }}</div>
-        <div>{{ TagTwo }}</div>
+        
+
+
+
+        <div># {{ getAllCat[0] }}</div>
+        <div># {{ getAllCat[1] }}</div>
       </div>
     </div>
     <span>Membre de la team</span>
@@ -22,7 +26,7 @@
         <img src="../assets/Moi.png" alt="" />
       </div>
     </div>
-    <span>Dead line</span>
+    <span>Créée</span>
     <div class="deadLine">
       <svg
         width="15"
@@ -44,7 +48,7 @@
           stroke-linejoin="round"
         />
       </svg>
-      <span>19 janv 2023</span>
+      <span>{{ dateFormated }}</span>
     </div>
   </div>
 </template>
@@ -62,18 +66,43 @@ export default {
     },
     TagOne: {
       type: String,
-      default: "#Job",
+      default: "Job",
     },
     TagTwo: {
       type: String,
-      default: "#Web Dev",
+      default: "Web Dev",
     },
-
+    date: {
+      type: String,
+      default: "19 janv 2023",
+    }, 
     Icon: {
       type: String,
       default: "💻",
     },
+    id: {
+      type: Number,
+      default: 0,
+    },
   },
+  computed: {
+    getAllCat(){
+      this.TagOne
+      let cat1 = this.TagOne[0]?.attributes.Category;
+      let cat2 = this.TagOne[1]?.attributes.Category;
+      let table = Array(cat1, cat2);
+      return table;
+    },
+
+    dateFormated() {
+      this.date 
+      let dateformat = new Date(this.date);
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      dateformat = dateformat.toLocaleDateString('fr-FR', options);
+      return dateformat 
+    }
+  },
+ 
 };
 </script>
 
@@ -150,4 +179,6 @@ span {
      margin: 0;
      margin-left: 5px;
 }
+
+
 </style>
